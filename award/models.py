@@ -47,6 +47,27 @@ class Post(models.Model):
         return got_projects
 
 
+class Rating(models.Model):
+    RATINGS = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10')
+    )
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    usability_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+    design_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+    content_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+    review = models.CharField(max_length=200)
+
 
 
 
