@@ -23,6 +23,13 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    sitename = models.CharField(max_length=50)
+    desc = HTMLField()
+    post_date = models.DateTimeField(default=timezone.now)
+    image1 = CloudinaryField('projects/')
+    link = models.CharField(max_length=70)
 
 
  
