@@ -32,7 +32,11 @@ class Post(models.Model):
     link = models.CharField(max_length=70)
 
 
- 
+    def __str__(self):
+        return self.sitename
+
+    def save_project(self):
+        self.save()
 
 
 
