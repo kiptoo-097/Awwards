@@ -68,6 +68,13 @@ class Rating(models.Model):
     content_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
     review = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.review
+
+    def save_rating(self):
+        self.save()
+
+   
 
 
 
