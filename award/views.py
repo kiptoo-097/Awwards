@@ -65,5 +65,17 @@ def user(request, user_id):
     return render(request, 'user.html', locals())
 
 
+def single_project(request, c_id):
+    current_user = request.user
+    current_project = Post.objects.get(id=c_id)
+    ratings = Rating.objects.filter(post_id=c_id)
+    usability = Rating.objects.filter(post_id=c_id).aggregate(Avg('usability_rating'))
+    content = Rating.objects.filter(post_id=c_id).aggregate(Avg('content_rating'))
+    design = Rating.objects.filter(post_id=c_id).aggregate(Avg('design_rating'))
+
+    return render(request, 'project.html',
+                  {"project": current_project, "user": current_user, 'ratings': ratings, "design": design,
+                   "content": content, "usability": usability})
+
 
 
