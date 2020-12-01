@@ -35,6 +35,11 @@ def edit(request):
     return render(request, 'edit_profile.html', locals())
 
 
+@login_required(login_url='/accounts/login/')
+def project(request):
+    posts = Post.objects.all().order_by('-post_date')
+    return render(request, 'projects.html', locals())
+
 
 
 
