@@ -56,6 +56,13 @@ def new_post(request):
     return render(request, 'new_post.html', {"form": form})
 
 
+@login_required(login_url='/accounts/login/')
+def user(request, user_id):
+    user_object = get_object_or_404(User, pk=user_id)
+    if request.user == user_object:
+        return redirect('profile')
+    user_projects = user_object.posts.all()
+    return render(request, 'user.html', locals())
 
 
 
