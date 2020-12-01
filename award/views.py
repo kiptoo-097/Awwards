@@ -78,4 +78,20 @@ def single_project(request, c_id):
                    "content": content, "usability": usability})
 
 
+def review_rating(request, id):
+    current_user = request.user
 
+    current_project = Post.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ProjectRatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.project = current_project
+            rating.user = current_user
+            rating.save()
+            return redirect('project', id)
+    else:
+        form = ProjectRatingForm()
+
+    return render(request, 'rating.html', {'form': form, "project": current_project, "user": current_user})
