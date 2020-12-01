@@ -22,8 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('award.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
-    # url(r'^accounts/', include('django_registration.backends.simple.urls')),
-    # url(r'^accounts/', include('django_registration.backends.one_step.urls')),
-    # path('logout/', auth_views.LogoutView, {"next_page": '/'}),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', auth_views.LogoutView.as_view()), 
 ]
